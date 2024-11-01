@@ -11,16 +11,16 @@ export default function App() {
   const [isOpen, setIsopen] = useState(true);
 
   function handlePrevious() {
-    if (step > 1) setState(step - 1);
+    if (step > 1) setState((s) => s - 1);
   }
 
   function handleNext() {
-    if (step < 3) setState(step + 1);
+    if (step < 3) setState((s) => s + 1);
   }
 
   return (
     <>
-      <button className="close" onClick={() => setIsopen(!isOpen)}>
+      <button className="close" onClick={() => setIsopen((is) => !is)}>
         &times;
       </button>
       {isOpen && (
@@ -37,21 +37,33 @@ export default function App() {
           </p>
 
           <div className="buttons">
-            <button
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+            <Button
+              bgColor="#7950f2"
+              textColor="#fff"
               onClick={handlePrevious}
-            >
-              Previous
-            </button>
-            <button
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              text="Previous"
+            />
+
+            <Button
+              bgColor="#7950f2"
+              textColor="#fff"
               onClick={handleNext}
-            >
-              Next
-            </button>
+              text="Next"
+            />
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function Button({ bgColor, textColor, onClick, text }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {text}
+    </button>
   );
 }
